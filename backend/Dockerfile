@@ -27,6 +27,10 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 # Set working directory inside container
 WORKDIR /app
 
+# Install runtime dependencies for Postgre (this step is included because we're calling a database)
+RUN apt-get update && apt-get install -y --no-install-recommends gcc libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy installed packages from builder
 COPY --from=builder /usr/local /usr/local
 
