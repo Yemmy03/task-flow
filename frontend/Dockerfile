@@ -31,6 +31,6 @@ RUN chown -R appuser:appgroup /usr/share/nginx/html \ # contains frontend files
     && chown -R appuser:appgroup /var/cache/nginx \ # contains cached files
     && chown -R appuser:appgroup /var/log/nginx # contains file logs
 
-USER appuser # switches to the user because Docker doesn't switch be default
+USER appuser # switches to the user because Docker doesn't switch by default
 
 CMD ["nginx", "-g", "daemon off;"] # starts nginx as a foreground and not in background (best practice)
