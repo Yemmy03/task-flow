@@ -22,7 +22,8 @@ COPY app ./app
 FROM python:3.11-slim
 
 # Create non-root user to de-escalate privileges and reduce the effect of a possible intrusion
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN groupadd --system appgroup \
+    && useradd --system --gid appgroup --no-create-home appuser
 
 # Set working directory inside container
 WORKDIR /app
