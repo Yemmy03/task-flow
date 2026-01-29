@@ -27,9 +27,9 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/
 
 # Change ownership (chown) recursively(-R) to non-root user (app user)
-RUN chown -R appuser:appgroup /usr/share/nginx/html \ # contains frontend files
-    && chown -R appuser:appgroup /var/cache/nginx \ # contains cached files
-    && chown -R appuser:appgroup /var/log/nginx # contains file logs
+RUN chown -R appuser:appgroup /usr/share/nginx/html \
+    && chown -R appuser:appgroup /var/cache/nginx \
+    && chown -R appuser:appgroup /var/log/nginx
 
 USER appuser # switches to the user because Docker doesn't switch by default
 
