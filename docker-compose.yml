@@ -37,4 +37,4 @@ services:
       - "80:80"
 
 volumes:
-  db_data: #this block here is what makes my data persistent (docker manages it itself)
+  task_db_data: # this block here is what makes my data persistent (docker manages it itself)
