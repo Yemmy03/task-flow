@@ -6,7 +6,7 @@ Expose 80
 
 WORKDIR /app
 COPY package.json package-lock.json* ./
-RUN npm ci --silent
+RUN npm install --silent
 
 COPY . .
 RUN npm run build
