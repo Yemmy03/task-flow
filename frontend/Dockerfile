@@ -11,7 +11,7 @@ RUN npm install --silent
 COPY . .
 RUN npm run build
 
-# Stage 2: serve # I'm using nginx (static file server not just reverse proxy) here not node because frontend files are static and don't need build
+# Stage 2: serve # I am using nginx (static file server not just reverse proxy) here not node because frontend files are static and don't need build
 FROM nginx:alpine 
 
 # Create non-root user to de-escalate privileges and reduce the effect of a possible intrusion
