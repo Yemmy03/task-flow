@@ -1,0 +1,14 @@
+.env
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+*.egg-info
+.env
+.env.* 
+*.pem
+*.key
+*.crt
+*.log
+.git

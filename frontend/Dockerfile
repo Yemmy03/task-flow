@@ -2,7 +2,7 @@
 FROM node:18-alpine AS builder
 
 # Expose the app port
-Expose 80
+EXPOSE 8080
 
 WORKDIR /app
 COPY package.json package-lock.json* ./
@@ -24,14 +24,15 @@ RUN rm /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Copy custom nginx config # Add custom Nginx config as the single source of truth for request handling
-COPY nginx.conf /etc/nginx/conf.d/
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Change ownership (chown) recursively(-R) to non-root user (app user)
+# Change ownership (chown) recursively(-R) to allow non-root (app user) read files
 RUN chown -R appuser:appgroup /usr/share/nginx/html \
     && chown -R appuser:appgroup /var/cache/nginx \
-    && chown -R appuser:appgroup /var/log/nginx
+    && chown -R appuser:appgroup /var/log/nginx \
+    && chown appuser:appgroup /etc/nginx/nginx.conf
 
 # Switch to non-root user for security
-USER appuser
+# USER appuser
 
-CMD ["nginx", "-g", "daemon off;"] # starts nginx as a foreground and not in background (best practice)
+CMD ["nginx", "-g", "daemon off;"] 

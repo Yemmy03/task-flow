@@ -7,12 +7,15 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="TaskFlow API")
 
-# Allow only your frontend domain
-frontend_origin = "http://localhost:5173"  # update this for production
+frontend_origins = [
+    "http://localhost:5173",
+    "http://localhost",
+    "http://backend:8001",
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[frontend_origin],
+    allow_origins=frontend_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

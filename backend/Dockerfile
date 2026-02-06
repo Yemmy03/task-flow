@@ -16,7 +16,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY app ./app
+COPY . .
 
 # Stage 2: runtime
 FROM python:3.11-slim
@@ -34,6 +34,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends libpq5 \
 
 # Copy installed packages from builder
 COPY --from=builder /usr/local /usr/local
+
+# COPY application code from builder stage
+COPY --from=builder /app /app
 
 # Change ownership (chown) recursively(-R) to non-root user (app user)
 RUN chown -R appuser:appgroup /app
