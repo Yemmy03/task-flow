@@ -10,10 +10,6 @@ TaskFlow is a simple three-tier web application designed with cloud-native deplo
 
 The application is intended to run locally for development and be deployed to AWS using ECS Fargate behind an Application Load Balancer.
 
-Run backend:
-- Set DATABASE_URL
-- uvicorn app.main:app --reload
-
 Run frontend:
 - npm install
 - npm run dev
